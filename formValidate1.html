@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #errName {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" name="form">
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name"><br>
+            <span id="errName"></span>
+        </div><br>
+        <div>
+            <label for="Password">Password: </label>
+            <input type="text" name="Password" id="Password"><br>
+            <span id="errPass"></span>
+        </div><br>
+        <div>
+            <label for="email">mail: </label>
+            <input type="text" name="email" id="email"><br>
+            <span id="errEmail"></span>
+        </div><br>
+        <div>
+            <label for="Address">Address: </label>
+            <input type="text" name="Address" id="Address"><br>
+            <span id="errAdd"></span>
+        </div><br>
+        <div>
+            <label for="dob">DOB: </label>
+            <input type="date" name="dob" id="dob"><br>
+            <span id="errDob"></span>
+        </div><br>
+        <div>
+            <label for="mobile">mobile: </label>
+            <input type="phone" name="mobile" id="mobile"><br>
+            <span id="errMob"></span>
+        </div><br>
+        <div>
+            <label for="education">Education: </label>
+            <select name="" id="select1">
+                <option value="BTech">BTech</option>
+                <option value="Bsc">Bsc</option>
+                <option value="Msc">Msc</option>
+            </select><br>
+        </div><br>
+        <div>
+            <label for="gender">Gender: </label><br>
+            <input type="radio" name="gender" id="male" value="Male">
+            <label for="male">Male</label><br>
+            <input type="radio" name="gender" id="female" value="Female">
+            <label for="female">Female</label><br>
+        </div><br>
+        <input type="button" name="submit" id="submit" value="submit" onclick="formSubmit()">
+    </form>
+
+    <script>
+        function formSubmit() {
+            //Name validation
+            let name1 = document.getElementById("name").value;
+            let nameSpan = document.getElementById("errName");
+            if (name1.length < 5 || name1.length >= 15) {
+                nameSpan.innerText = "Min 5 character max 15 character";
+            } else {
+                nameSpan.innerText = "";
+            }
+
+
+            //Password validation
+            let pass1 = document.getElementById("Password").value;
+            let passSpan = document.getElementById("errPass");
+
+            // regEx
+            const alphanumericRegex = /^[a-zA-Z0-9]+$/
+
+            function isAlphanumeric(str) {
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charCodeAt(i);
+
+                    if (!(char >= 48 && char <= 57) && !(char >= 65 && char <= 90) && !(char >= 97 && char <= 122)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            if (pass1.length < 8 || pass1.length > 15) {
+                passSpan.innerText = "length should be between 8 and 15";
+                passSpan.style.color = "red";
+            } else if (isAlphanumeric(pass1)) {
+                //else if(alphanumericRegex.test(pass1)){
+                passSpan.innerText = "password should be alphanumeric";
+                passSpan.style.color = "red";
+
+            } else {
+                passSpan.innerHTML = "Password accepted";
+                passSpan.style.color = "green";
+            }
+
+
+            //EMAIL VALIDATION
+            let email1 = document.getElementById("email").value;
+            let emailSpan = document.getElementById("errEmail");
+
+            //const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            const atSymbol = email1.indexOf("@");
+            const dot = email1.indexOf(".");
+
+            if (atSymbol > 0 && email1.substring(atSymbol + 1, dot).length > 0 && dot < email1.length - 1 && email1.indexOf(" ") === -1) {
+                emailSpan.innerText = "Valid Email";
+                emailSpan.style.color = "green";
+            } else {
+                emailSpan.innerText = "Invalid Email";
+                emailSpan.style.color = "red";
+            }
+
+
+            //Address validation
+            let add = document.getElementById("Address").value;
+            let errAddress = document.getElementById("errAdd");
+
+            if (add.length < 8 || add.length > 35) {
+                errAddress.innerText = "Address between 8-35 character";
+                errAddress.style.color = "red";
+            } else {
+                errAddress.innerText = "Add excepted";
+                errAddress.style.color = "green";
+            }
+
+
+            //AGE validation
+            let dob1 = document.getElementById("dob").value;
+            let dobSpan = document.getElementById("errDob");
+
+            if (!dob1) {
+                dobSpan.innerText = "please Select age";
+            } else {
+                const selectedDate = new Date(dob1);
+                const todayDate = new Date();
+
+                const age = todayDate.getFullYear() - selectedDate.getFullYear();
+
+                if (age > 18 && age < 35) {
+                    dobSpan.innerText = "You are eligible";
+                    dobSpan.style.color = "green";
+                } else {
+                    dobSpan.innerText = "You are not eligible";
+                    dobSpan.style.color = "red";
+                }
+            }
+
+            //Mobile number validation
+            let mobile1 = document.getElementById("mobile").value;
+            let mobSpan = document.getElementById("errMob");
+
+            function isNumeric(num){
+                
+
+                for(let i = 0; i < mobile1.length; i++){
+                    const digit = mobile1.charCodeAt(i);
+                    if(!(digit >=48 && digit <= 57)){
+                        return false;
+                    } 
+                }
+                return true;
+            }
+            if(isNumeric(mobile1) && mobile1.length == 10){
+                mobSpan.innerText = "valid number";
+                mobSpan.style.color = "green";
+            } else {
+                mobSpan.innerText = "invalid number";
+                mobSpan.style.color = "red";
+            }
+        }
+    </script>
+</body>
+
+</html>
