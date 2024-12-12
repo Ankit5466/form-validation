@@ -1,0 +1,5 @@
+Q2. 
+
+No1.____________ No2 ______________  DROPDOWN 	Result_______
+Value in option will be +  *  /  %.   
+Put basic validation required , input type number

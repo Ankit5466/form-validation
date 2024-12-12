@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <label for="n1">No1</label>
+        <input type="text" name="n1" id="n1">
+        <label for="n2">No2</label>
+        <input type="text" name="n2" id="n2">
+        <select name="operator" id="operator">
+            <option value="+" id="plus">+</option>
+            <option value="-" id="subtract">-</option>
+            <option value="*" id="multiply">*</option>
+            <option value="/" id="divide">/</option>
+            <option value="%" id="modulus">%</option>
+        </select>
+        <label for="result">Result</label>
+        <input type="text" id="result" disabled>
+        <input type="button" value="click" onclick="validate()">
+    </form>
+</body>
+
+<script>
+    function validate() {
+        const num1 = document.getElementById("n1").value.trim();
+        const num2 = document.getElementById("n2").value.trim();
+        const operator = document.getElementById("operator");
+        const res = document.getElementById("result");
+
+        const regEx = /^[0-9]+$/;
+
+        if(!regEx.test(num1) || !regEx.test(num2)){
+            alert("please enter valid number");
+            return;
+        }
+
+        const n1 = parseFloat(num1);
+        const n2 = parseFloat(num2);
+
+        let result;
+
+        const selected = operator.options[operator.selectedIndex].id;
+        console.log(selected);
+
+        if(selected == "plus"){
+            result = n1+n2;
+        } else if(selected == "subtract"){
+            result = n1-n2;
+        } else if(selected == "multiply"){
+            result = n1*n2;
+        } else if(selected == "divide"){
+            if(n2 === 0){
+                alert("cannot be 0")
+            } else {
+                result = n1/n2;
+            }
+        } else if(selected == "modulus"){
+            result = n1%n2;
+        } else{
+            alert("invalid operator");
+            return;
+        }
+        /*
+        switch (operator) {
+            case "+":
+                result = n1+n2;
+                break;
+            case "-":
+                result = n1 - n2;
+                break;
+            case "*":
+                result = n1*n2;
+                break;
+            case "/":
+                if(n2 === 0) {
+                    alert("cannot divide by 0");
+                } else {
+                    result = n1/n2;
+                }
+                break;
+            case "%":
+                result = n1 % n2;
+                break;
+            default:
+                alert("invalid operator");
+                break;
+        }
+        */
+        res.value = result;
+    }
+</script>
+
+</html>
