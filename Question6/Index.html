@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <label for="num">Enter Number</label>
+        <input type="text" name="num" id="num" onchange="calculate()">
+    </div>
+    <div>
+        <label for="fact">Factorial</label>
+        <input type="text" name="fact" id="fact">
+    </div>
+
+    <script>
+        calculate = () => {
+            const n = parseInt(document.getElementById("num").value);
+            const f = document.getElementById("fact");
+
+            if (isNaN(n) || n < 0) {
+                f.value = "invalid input";
+                return;
+            } else {
+                let fact = 1;
+                for (let i = 1; i <= n; i++) {
+                    fact = fact * i;
+                }
+                f.value = fact;
+            }
+
+
+            // fact = (n) => {
+            //     if (n == 0 || n == 1) {
+            //         return 1;
+            //     } else {
+            //         return n * fact(n - 1);
+            //     }
+            // };
+            // console.log(fact(n));
+            // f.value = fact(n);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <div>
+            <label for="num">Enter Number</label>
+            <input type="text" name="num" id="num">
+        </div>
+        <p id="demo"></p>
+        <input type="button" value="click" onclick="prime()">
+    </form>
+
+    <script>
+        const prime = () => {
+            const n = parseInt(document.getElementById("num").value);
+            const p1 = document.getElementById("demo");
+
+            if (isNaN(n) || n < 0) {
+                p1.innerText = "invalid number";
+                return;
+            }
+
+            let primes = []
+            let current = n + 1;
+
+
+            while (primes.length < n) {
+                let isPrime = true;
+
+                for (let i = 2; i <= Math.sqrt(current); i++) {
+                    if (current % i == 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+
+                if (isPrime){
+                    primes.push(current);
+                }
+                current++;
+            }
+            p1.innerText = primes.join(", ");
+            console.log(p1.innerText);
+        }
+    </script>
+</body>
+
+</html>
