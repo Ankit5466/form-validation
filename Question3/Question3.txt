@@ -1,0 +1,7 @@
+Q3. Update Password:
+       Password_________
+     Re enter Password_______
+         Update    Reset
+Let user enter New password and ensure both text filed has same password. If not give appropriate message. If correct then display alert message Password updated successfully .
+Permanent Address___________   CheckBox          Temporary Address______
+If user click on check box copy address in another text area.

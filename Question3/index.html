@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <div>
+            <label for="pass">Password:</label><br>
+            <input type="text" id="pass">
+        </div><br>
+        <div>
+            <label for="repass">Re-Enter Password:</label><br>
+            <input type="text" name="repass" id="repass">
+        </div><br>
+        <div>
+            <label for="address">Address</label><br>
+            <textarea name="address" id="address" cols="20" rows="5"></textarea>
+            <label>
+                <input type="checkbox" id="check" onchange="copyText()"> copy address
+            </label>
+        </div><br>
+        <div>
+            <label for="readdress">Re-Enter Address</label><br>
+            <textarea name="readdress" id="readdress" cols="20" rows="5"></textarea>
+        </div>
+        <input type="button" value="update" onclick="update()">
+        <input type="button" value="Reset" onclick="reset()">
+    </form>
+
+    <script>
+        function update() {
+            const pass1 = document.getElementById("pass").value;
+            const pass2 = document.getElementById("repass").value;
+
+            const regEx = /^[a-zA-Z0-9]+$/;
+
+            if (pass1 == "" || pass2 == "") {
+                alert("Enter password");
+            } else if(pass1.length < 6){
+                alert("length must greater than 6");
+            } else if (!regEx.test(pass1)) {
+                alert("password shuold be alphanumeric");
+            } else if (pass1 !== pass2) {
+                alert("password not matching");
+            } else {
+                alert("password updated");
+            }
+        }
+
+        function reset() {
+            const pass1 = document.getElementById("pass");
+            const pass2 = document.getElementById("repass");
+
+            pass1.value = "";
+            pass2.value = "";
+        }
+
+        function copyText() {
+            const address1 = document.getElementById("address").value;
+            const address2 = document.getElementById("readdress");
+            const check1 = document.getElementById("check")
+
+            if (check1.checked) {
+                address2.value = address1;
+            } else {
+                address2.value = "";
+            }
+        }
+    </script>
+</body>
+
+</html>
